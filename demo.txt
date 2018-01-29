@@ -1,0 +1,3 @@
+de <Lyon> a <Bordeaux> en <Train>
+de <Lyon> a <Paris> en <Auto>
+de <Lyon> a <Marseille> en <Bateau> _ de <Marseille> a <Paris> en <Avion>
