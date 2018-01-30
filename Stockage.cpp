@@ -40,7 +40,7 @@ void Stockage::RemplirMapExclus(string nomFichier)
             Log newLog = lf.LireLog();
             string extension = newLog.GetExtension();
             string cible = newLog.GetCible();
-            if (extension != "png" && extension != "css" && extension != "js")
+            if (extension != "png" && extension != "css" && extension != "js" && extension != "jpg")
             {
                 if (stockLog.find(cible) == stockLog.end())
                 {
@@ -62,7 +62,7 @@ void Stockage::RemplirMapExclus(string nomFichier)
 void Stockage::RemplirMapExclusHeure(int heureChoisie, string nomFichier)
 {
     Logfile lf(nomFichier);
-    if (lf.is_open())
+    if (lf.is_open() && heureChoisie!=-1 )
     {
         while (!lf.eof())
         {
@@ -70,7 +70,7 @@ void Stockage::RemplirMapExclusHeure(int heureChoisie, string nomFichier)
             string extension = newLog.GetExtension();
             string cible = newLog.GetCible();
             int heureLog = newLog.GetHeure();
-            if (heureLog == heureChoisie && extension != "png" && extension != "css" && extension != "js")
+            if (heureLog == heureChoisie && extension != "png" && extension != "css" && extension != "js" && extension != "jpg")
             {
                 if (stockLog.find(cible) == stockLog.end())
                 {
@@ -90,17 +90,18 @@ void Stockage::RemplirMapExclusHeure(int heureChoisie, string nomFichier)
     }
 }
 
-void Stockage::RemplirMap(int heureChoisie, string nomFichier)
+void Stockage::RemplirMapHeure(int heureChoisie, string nomFichier)
 {
     Logfile lf(nomFichier);
     if (lf.is_open())
     {
-        if (heureChoisie != -1)
+        while (!lf.eof())
         {
-            while (!lf.eof())
+            Log newLog = lf.LireLog();
+            string cible = newLog.GetCible();
+            int heureLog = newLog.GetHeure();
+            if (heureChoisie == heureLog)
             {
-                Log newLog = lf.LireLog();
-                string cible = newLog.GetCible();
                 if (stockLog.find(cible) == stockLog.end())
                 {
                     stockLog.insert(pair<string,int>(cible,1));
@@ -110,26 +111,31 @@ void Stockage::RemplirMap(int heureChoisie, string nomFichier)
                     stockLog.find(cible)->second++;
                 }
             }
-        }
-        else
-        {
-            while (!lf.eof())
-            {
-                Log newLog = lf.LireLog();
-                string cible = newLog.GetCible();
-                int heureLog = newLog.GetHeure();
-                if (heureChoisie == heureLog)
-                {
-                    if (stockLog.find(cible) == stockLog.end())
-                    {
-                        stockLog.insert(pair<string,int>(cible,1));
-                    }
-                    else
-                    {
-                        stockLog.find(cible)->second++;
-                    }
-                }
 
+        }
+    }
+    else
+    {
+        cerr << "Erreur lors de l'ouverture du fichier" << endl;
+    }
+}
+
+void Stockage::RemplirMapSansCond(string nomFichier)
+{
+    Logfile lf(nomFichier);
+    if (lf.is_open() && heure != -1)
+    {
+        while (!lf.eof())
+        {
+            Log newLog = lf.LireLog();
+            string cible = newLog.GetCible();
+            if (stockLog.find(cible) == stockLog.end())
+            {
+                stockLog.insert(pair<string,int>(cible,1));
+            }
+            else
+            {
+                stockLog.find(cible)->second++;
             }
         }
     }
@@ -137,13 +143,11 @@ void Stockage::RemplirMap(int heureChoisie, string nomFichier)
     {
         cerr << "Erreur lors de l'ouverture du fichier" << endl;
     }
-    cout << "map remplie" << endl;
 
 }
 
 void Stockage::AfficherTop()
 {
-    cout << "j'affiche" << endl;
     TopTen ttexclu(stockLog);
     cout << ttexclu; // Surcharger operator <<*/
 }

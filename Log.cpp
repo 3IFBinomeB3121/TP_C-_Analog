@@ -43,6 +43,11 @@ string Log::GetCible()
     return cible;
 }
 
+string Log::GetSource()
+{
+    return source;
+}
+
 int Log::GetHeure()
 {
     return heure;

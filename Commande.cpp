@@ -17,6 +17,7 @@ using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Commande.h"
 #include "Stockage.h"
+#include "Graphe.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -58,7 +59,7 @@ void Commande::Choisir()
         {
             // Création TopTen : veut dire qu'il n'y a pas eu d'option
             Stockage S;
-            S.RemplirMap(-1,"anonyme.log");
+            S.RemplirMapSansCond(option[nombreArg-1]);
 			S.AfficherTop();
         }
         else
@@ -71,7 +72,7 @@ void Commande::Choisir()
             case 3:
             {
                 Stockage stockExclus;
-                stockExclus.RemplirMapExclus("anonyme.log");
+                stockExclus.RemplirMapExclus(option[nombreArg-1]);
                 stockExclus.AfficherTop();
                 // Ne peut être que exclure
                 break;
@@ -85,7 +86,14 @@ void Commande::Choisir()
                     bool valideExt = VerifierExtensionDot(nomFichierDot);
                     if (valideExt)
                     {
-                        //Tracer graphe
+						// Faire methode pour exclus, heure et les 2 comme pour stockage ...
+                        //Tracer graphe mais en stockant d'abord grace a stockage puis en faisant appel a remplir graphe
+                        Stockage S;
+                        S.RemplirMapSansCond(option[nombreArg-1]);
+                        S.AfficherTop();
+                        Graphe G;
+                        G.RemplirGrapheSansCond(option[nombreArg-1]);
+                        G.CreerFichier(nomFichierDot);
                     }
                     else
                     {
@@ -100,7 +108,8 @@ void Commande::Choisir()
                     {
                         // Afficher top 10 pour l'heure.
                         Stockage stockHeure;
-                        stockHeure.RemplirMap(valideHeure);
+                        stockHeure.RemplirMapHeure(valideHeure,option[nombreArg-1]);
+                        stockHeure.AfficherTop();
                     }
                     else
                     {
@@ -120,6 +129,22 @@ void Commande::Choisir()
                     // Ne peut être que exclure et soit heure soit graphe sinon options inconnues
                     if (exclure && tracerGraphe)
                     {
+                        // Tracer graphe avec les fichiers exclus
+                        string nomFichierDot = option[tracerGraphe+1];
+                        bool valideExt = VerifierExtensionDot(nomFichierDot);
+                        if (valideExt)
+                        {
+                            Stockage S;
+                            S.RemplirMapExclus(option[nombreArg-1]);
+                            S.AfficherTop();
+                            Graphe G;
+                            G.RemplirGrapheExclus(option[nombreArg-1]);
+                            G.CreerFichier(nomFichierDot);
+                        }
+                        else
+                        {
+                            cerr << "Le fichier indiqué ne contient pas la bonne extension (dot)";
+                        }
 
                     }
                     else if (exclure && optionHeure)
@@ -129,7 +154,7 @@ void Commande::Choisir()
                         {
                             // Afficher top 10 pour l'heure.
                             Stockage stockHeureExclus;
-                            stockHeureExclus.RemplirMap(valideHeure);
+                            stockHeureExclus.RemplirMapExclusHeure(valideHeure, option[nombreArg-1]);
                             stockHeureExclus.AfficherTop();
                         }
                         else
@@ -148,10 +173,15 @@ void Commande::Choisir()
             {
                 int valideH = VerifierHeure(optionHeure);
                 string nomFichierDot = option[tracerGraphe+1];
-                bool valideExtension = VerifierExtensionDot(nomFichierDot);
-                if (valideExtension && valideH)
+                bool valideEx = VerifierExtensionDot(nomFichierDot);
+                if (valideEx && valideH)
                 {
                     //Tracer graphe en fonction de l'heure choisie
+                    Stockage S;
+                    S.RemplirMapHeure(valideH, option[nombreArg-1]);
+                    Graphe G;
+                    G.RemplirGrapheExclusHeure(valideH, option[nombreArg-1]);
+                    G.CreerFichier(nomFichierDot);
                 }
                 else
                 {
@@ -171,6 +201,12 @@ void Commande::Choisir()
                 if (valideExtent && valideHeu)
                 {
                     //Tracer graphe en fonction de l'heure choisie et avec exclus
+                    Stockage S;
+                    S.RemplirMapExclusHeure(valideHeu,option[nombreArg-1]);
+                    S.AfficherTop();
+                    Graphe G;
+                    G.RemplirGrapheExclusHeure(valideHeu,option[nombreArg-1]);
+                    G.CreerFichier(nomFichierDot);
                 }
                 else
                 {
@@ -214,15 +250,13 @@ Commande::Commande (int nbArg, char ** arg)
 #ifdef MAP
     cout << "Appel au constructeur de <Commande>" << endl;
 #endif
-	cout << "Trace 1" << endl;
-	option = new char*[nbArg];
-	/*int i;
+	/*option = new char*[nbArg];
+	int i;
 	for (i=0; i<nbArg; i++)
     {
         strcpy(option[i],arg[i]);
     }*/
     option = arg;
-    cout << "trace 2" << endl;
 } //----- Fin de Commande
 
 
@@ -287,12 +321,13 @@ bool Commande::OptExclure()
 
 int Commande::VerifierHeure(int horaire) // Retourne l'heure si elle est valide sinon -1
 {
-    int premChiffre = (int) option[horaire+1][0];
-    int deuxChiffre = (int) option[horaire+1][1];
-    int calculHeure = premChiffre*10 + deuxChiffre;
-    if (0<= calculHeure && calculHeure<24)
+	cout << option[horaire] << endl;
+	cout << option[horaire+1] << endl;
+    int heureAverif = stoi(option[horaire+1]);
+    cout << "heure : " << heureAverif << endl;
+    if (0<= heureAverif && heureAverif<24)
     {
-        return calculHeure;
+        return heureAverif;
     }
     else
     {

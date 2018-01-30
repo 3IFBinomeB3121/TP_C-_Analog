@@ -36,11 +36,13 @@ public:
     //
     void AfficherTop(); // Méthode qui va créer le top10 et l'afficher
 
-    void RemplirMapExclusHeure(int heureChoisie, string nomFichier = "");
+    void RemplirMapExclusHeure(int heureChoisie = -1, string nomFichier = "");
 
     void RemplirMapExclus(string nomFichier = "");
 
-    void RemplirMap(int heureChoisie = -1, string nomFichier = "");
+    void RemplirMapSansCond(string nomFichier = "");
+
+    void RemplirMapHeure(int heureChoisie = -1, string nomFichier = "");
 
 
 //------------------------------------------------- Surcharge d'opérateurs

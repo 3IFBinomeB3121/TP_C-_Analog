@@ -31,12 +31,24 @@ ostream & operator << (ostream & flux, const TopTen & unTopTen)
 {
     multimap<int,string>::const_reverse_iterator it;
     int compteur = 0;
-    for (it = unTopTen.mmTop.crbegin( ); compteur < 10; ++it)
+    if (unTopTen.mmTop.size()>=10)
     {
-        flux << it->second << " (" << it->first << " hits)" << endl;
-        compteur++;
-        flux << compteur <<endl;
+        flux << "Affichage du TOP 10 : " << endl;
+        for (it = unTopTen.mmTop.crbegin( ); compteur < 10; ++it)
+        {
+            flux << it->second << " (" << it->first << " hits)" << endl;
+            compteur++;
+        }
     }
+    else
+    {
+        flux << "Affichage des " << unTopTen.mmTop.size() << "log que contient le fichier" << endl;
+        for (it = unTopTen.mmTop.crbegin( ); it != unTopTen.mmTop.crend( ); ++it)
+        {
+            flux << it->second << " (" << it->first << " hits)" << endl;
+        }
+    }
+
 }
 
 //------------------------------------------------- Surcharge d'opérateurs

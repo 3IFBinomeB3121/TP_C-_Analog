@@ -1,31 +1,34 @@
 /*************************************************************************
-                           Log  -  description
+                           Graphe  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Log> (fichier Log.h) ----------------
-#if ! defined ( Log_H )
-#define Log_H
+//---------- Interface de la classe <Graphe> (fichier Graphe.h) ----------------
+#if ! defined ( Graphe_H )
+#define Graphe_H
 
 //--------------------------------------------------- Interfaces utilisées
 
-using namespace std;
-#include <iostream>
 #include <string>
+#include <map>
+#include "Log.h"
+#include "Logfile.h"
+#include <fstream>
+
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Log>
+// Rôle de la classe <Graphe>
 //
 //
 //------------------------------------------------------------------------
 
-class Log
+class Graphe
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -37,35 +40,34 @@ public:
     // Contrat :
     //
 
+void RemplirGrapheSansCond(string nomFichier = "");
+void RemplirGrapheHeure(int heureChoisie, string nomFichier = "");
+void RemplirGrapheExclus(string nomFichier = "");
+void RemplirGrapheExclusHeure(int heureChoisie, string nomFichier = "");
+void CreerFichier (string nomFichierDot = "");
 
 //------------------------------------------------- Surcharge d'opérateurs
-    //Log & operator = ( const Log & unLog );
+    Graphe & operator = ( const Graphe & unGraphe );
     // Mode d'emploi :
     //
     // Contrat :
     //
-    string GetExtension();
-    string GetCible();
-    string GetSource();
-    int GetHeure();
-
-    friend ostream & operator << ( ostream & flux, const Log & unLog );
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Log ( const Log & unLog );
+    Graphe ( const Graphe & unGraphe );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Log (string ligneFichier = "");
+    Graphe ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Log ( );
+    virtual ~Graphe ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -77,22 +79,13 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-	string referent;
-	string adresseIP;
-	string nom_visiteur;
-	string pseudo;
-	string date;
-	int heure;
-	string methode;
-	string cible;
-	string protocole;
-	int status_code;
-	int nbOctet;
-	string source;
-	string id_client_navigateur;
+
+	multimap<string,pair<string,int>> arc;
+	map<string,int> noeud;
+
 };
 
-//-------------------------------- Autres définitions dépendantes de <Log>
+//-------------------------------- Autres définitions dépendantes de <Graphe>
 
-#endif // Log_H
+#endif // Graphe_H
 
