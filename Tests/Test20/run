@@ -1,1 +1,1 @@
-../../analog /tmp/anonyme.log
+../../analog -g test20.dot -e /tmp/centTest.log
