@@ -1,0 +1,1 @@
+../../analog -t -e 17 -g fichier.dot /tmp/anonyme.log
