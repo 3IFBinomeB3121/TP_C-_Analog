@@ -84,7 +84,7 @@ void Commande::Choisir()
 				}
 				else
 				{
-					cout << "option rentrée non valide" << endl;
+					cerr << "option rentrée non valide" << endl;
 				}
 				break;
             }
@@ -190,7 +190,7 @@ void Commande::Choisir()
                 int valideH = VerifierHeure(optionHeure);
                 string nomFichierDot = option[tracerGraphe+1];
                 bool valideEx = VerifierExtensionDot(nomFichierDot);
-                if (valideEx && valideH)
+                if (valideEx && valideH != -1)
                 {
                     //Tracer graphe en fonction de l'heure choisie
                     Stockage S;
@@ -217,7 +217,7 @@ void Commande::Choisir()
                 int valideHeu = VerifierHeure(optionHeure);
                 string nomFichierDot = option[tracerGraphe+1];
                 bool valideExtent = VerifierExtensionDot(nomFichierDot);
-                if (valideExtent && valideHeu)
+                if (valideExtent && valideHeu != -1)
                 {
                     //Tracer graphe en fonction de l'heure choisie et avec exclus
                     Stockage S;
@@ -259,12 +259,6 @@ Commande::Commande (int nbArg, char ** arg)
 #ifdef MAP
     cout << "Appel au constructeur de <Commande>" << endl;
 #endif
-	/*option = new char*[nbArg];
-	int i;
-	for (i=0; i<nbArg; i++)
-    {
-        strcpy(option[i],arg[i]);
-    }*/
     option = arg;
 } //----- Fin de Commande
 
@@ -276,7 +270,7 @@ Commande::~Commande ( )
 #ifdef MAP
     cout << "Appel au destructeur de <Commande>" << endl;
 #endif
-	//delete [] option;
+//	delete [] option;
 } //----- Fin de ~Commande
 
 
@@ -288,14 +282,21 @@ bool Commande::VerifierExtensionLog(string nomFichierLog)
     ss.seekg(0,ss.end); // Permet de recuperer l'extension au cas ou il y aurait un chemin relatif ou absolu
     long taille = ss.tellg();
     ss.seekg(0);
-    char * buffer = new char[taille-3];
-    ss.read(buffer,taille-3);
-    getline(ss,extension);
-    delete [] buffer;
-    if (extension == "log")
+    if (taille>3)
     {
-        return true;
-    }
+		char * buffer = new char[taille-3];
+		ss.read(buffer,taille-3);
+		getline(ss,extension);
+		delete [] buffer;
+		if (extension == "log")
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
     else
     {
         return false;
@@ -353,14 +354,21 @@ bool Commande::VerifierExtensionDot(string nomFichierDot)
     ss.seekg(0,ss.end); // Permet de recuperer l'extension au cas ou il y aurait un chemin relatif ou absolu
     long taille = ss.tellg();
     ss.seekg(0);
-    char * buffer = new char[taille-3];
-    ss.read(buffer,taille-3);
-    getline(ss,extension);
-    delete [] buffer;
-    if (extension == "dot")
+	if (taille>3)
     {
-        return true;
-    }
+		char * buffer = new char[taille-3];
+		ss.read(buffer,taille-3);
+		getline(ss,extension);
+		delete [] buffer;
+		if (extension == "dot")
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
     else
     {
         return false;

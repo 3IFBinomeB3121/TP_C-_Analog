@@ -1,2 +1,1 @@
-../../analog -g test13.dot /tmp/centLog.log
-../../analog -g test13.dot /tmp/centLog.log
+../../analog -g test12.dot centTest.log

@@ -1,0 +1,1 @@
+../../analog -t 17 -g test22.dot -e -r -s /tmp/anonyme.log

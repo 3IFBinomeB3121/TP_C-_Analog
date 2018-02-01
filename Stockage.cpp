@@ -52,6 +52,8 @@ void Stockage::RemplirMapExclus(string nomFichier)
                 }
             }
         }
+        // Permet d'effacer le tuple en cas de log ajouté sans valeur de clé
+        //stockLog.erase(stockLog.find(""));  
     }
     else
     {
@@ -80,9 +82,10 @@ void Stockage::RemplirMapExclusHeure(int heureChoisie, string nomFichier)
                 {
                     stockLog.find(cible)->second++;
                 }
-
             }
         }
+        // Permet d'effacer le tuple en cas de log ajouté sans valeur de clé
+		//stockLog.erase(stockLog.find(""));
     }
     else
     {
@@ -110,9 +113,10 @@ void Stockage::RemplirMapHeure(int heureChoisie, string nomFichier)
                 {
                     stockLog.find(cible)->second++;
                 }
-            }
-
+            }    
         }
+        // Permet d'effacer le tuple en cas de log ajouté sans valeur de clé
+		// stockLog.erase(stockLog.find(""));
     }
     else
     {
@@ -138,6 +142,8 @@ void Stockage::RemplirMapSansCond(string nomFichier)
                 stockLog.find(cible)->second++;
             }
         }
+        // Permet d'effacer le tuple en cas de log ajouté sans valeur de clé
+        //stockLog.erase(stockLog.find(""));
     }
     else
     {
@@ -174,9 +180,6 @@ Stockage::Stockage ()
 #ifdef MAP
     cout << "Appel au constructeur de <Stockage>" << endl;
 #endif
-
-   // stockLog = new unordered_map<string, int>;
-
 } //----- Fin de Stockage
 
 
@@ -187,7 +190,6 @@ Stockage::~Stockage ( )
 #ifdef MAP
     cout << "Appel au destructeur de <Stockage>" << endl;
 #endif
-//	delete stockLog;
 } //----- Fin de ~Stockage
 
 

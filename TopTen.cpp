@@ -41,14 +41,14 @@ ostream & operator << (ostream & flux, const TopTen & unTopTen)
             compteur++;
         }
     }
-    else if (nbLog == 1)
+    else if (nbLog == 0)
     {
 		flux << "Le fichier ne contient aucun log" << endl;
 	}
 	else
     {
-        flux << "Affichage des " << unTopTen.mmTop.size()-1 << " log que contient le fichier" << endl;
-        for (it = unTopTen.mmTop.crbegin( );  compteur < nbLog-1; ++it)
+        flux << "Affichage des " << nbLog << " log que contient le fichier" << endl;
+        for (it = unTopTen.mmTop.crbegin( );  compteur < nbLog; ++it)
         {
             flux << compteur+1 << ". " << it->second << " (" << it->first << " hits)" << endl;
             compteur++;
@@ -75,7 +75,6 @@ TopTen::TopTen ( const unordered_map<string,int> unM )
     unordered_map<string,int>::const_iterator it;
     for (it = unM.cbegin( ); it != unM.cend( ); ++it)
 	{
-		//if (it->first != "")
         mmTop.insert( pair<int,string>(it->second,it->first) );
     }
 
