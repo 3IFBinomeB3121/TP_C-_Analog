@@ -1,0 +1,53 @@
+# depslib dependency file v1.0
+1517259695 source:c:\users\christophe\documents\programmation\projet codeblock\tp_c++_4\commande.cpp
+	<iostream>
+	"Commande.h"
+	"Stockage.h"
+
+1517347868 c:\users\christophe\documents\programmation\projet codeblock\tp_c++_4\commande.h
+	<string.h>
+	<sstream>
+
+1517350747 c:\users\christophe\documents\programmation\projet codeblock\tp_c++_4\stockage.h
+	<unordered_map>
+
+1517347867 source:c:\users\christophe\documents\programmation\projet codeblock\tp_c++_4\log.cpp
+	<iostream>
+	"Log.h"
+	<sstream>
+	<cstring>
+
+1517347867 c:\users\christophe\documents\programmation\projet codeblock\tp_c++_4\log.h
+	<iostream>
+	<string>
+
+1517347867 source:c:\users\christophe\documents\programmation\projet codeblock\tp_c++_4\logfile.cpp
+	<iostream>
+	"Logfile.h"
+
+1517347867 c:\users\christophe\documents\programmation\projet codeblock\tp_c++_4\logfile.h
+	<fstream>
+	"Log.h"
+
+1517347867 source:c:\users\christophe\documents\programmation\projet codeblock\tp_c++_4\main.cpp
+	<iostream>
+	"Commande.h"
+	"Stockage.h"
+	"Log.h"
+	"Logfile.h"
+
+1517249600 source:c:\users\christophe\documents\programmation\projet codeblock\tp_c++_4\stockage.cpp
+	<iostream>
+	"Stockage.h"
+	"TopTen.h"
+	"Logfile.h"
+
+1517249598 c:\users\christophe\documents\programmation\projet codeblock\tp_c++_4\topten.h
+	<string>
+	<map>
+	<unordered_map>
+
+1517249599 source:c:\users\christophe\documents\programmation\projet codeblock\tp_c++_4\topten.cpp
+	<iostream>
+	"TopTen.h"
+

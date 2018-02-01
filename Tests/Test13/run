@@ -1,0 +1,2 @@
+../../analog -g test13.dot.outfile /tmp/centLog.log
+../../analog -g test13.dot.outfile /tmp/centLog.log

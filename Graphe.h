@@ -14,8 +14,6 @@
 
 #include <string>
 #include <map>
-#include "Log.h"
-#include "Logfile.h"
 #include <fstream>
 
 //------------------------------------------------------------- Constantes

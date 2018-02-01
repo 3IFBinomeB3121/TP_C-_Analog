@@ -31,43 +31,38 @@ ostream & operator << (ostream & flux, const TopTen & unTopTen)
 {
     multimap<int,string>::const_reverse_iterator it;
     int compteur = 0;
-    if (unTopTen.mmTop.size()>=10)
+    int nbLog = unTopTen.mmTop.size();
+    if (nbLog>=10)
     {
         flux << "Affichage du TOP 10 : " << endl;
         for (it = unTopTen.mmTop.crbegin( ); compteur < 10; ++it)
         {
-            flux << it->second << " (" << it->first << " hits)" << endl;
+            flux << compteur+1 << ". " << it->second << " (" << it->first << " hits)" << endl;
             compteur++;
         }
     }
-    else
+    else if (nbLog == 1)
     {
-        flux << "Affichage des " << unTopTen.mmTop.size() << "log que contient le fichier" << endl;
-        for (it = unTopTen.mmTop.crbegin( ); it != unTopTen.mmTop.crend( ); ++it)
+		flux << "Le fichier ne contient aucun log" << endl;
+	}
+	else
+    {
+        flux << "Affichage des " << unTopTen.mmTop.size()-1 << " log que contient le fichier" << endl;
+        for (it = unTopTen.mmTop.crbegin( );  compteur < nbLog-1; ++it)
         {
-            flux << it->second << " (" << it->first << " hits)" << endl;
+            flux << compteur+1 << ". " << it->second << " (" << it->first << " hits)" << endl;
+            compteur++;
         }
     }
-
+    return flux;
 }
 
 //------------------------------------------------- Surcharge d'opérateurs
-TopTen & TopTen::operator = ( const TopTen & unTopTen )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
+
 
 
 //-------------------------------------------- Constructeurs - destructeur
-TopTen::TopTen ( const TopTen & unTopTen )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <TopTen>" << endl;
-#endif
-} //----- Fin de TopTen (constructeur de copie)
+
 
 
 TopTen::TopTen ( const unordered_map<string,int> unM )
@@ -77,10 +72,10 @@ TopTen::TopTen ( const unordered_map<string,int> unM )
 #ifdef MAP
     cout << "Appel au constructeur de <TopTen>" << endl;
 #endif
-    // mmTop = new multimap();
     unordered_map<string,int>::const_iterator it;
     for (it = unM.cbegin( ); it != unM.cend( ); ++it)
-    {
+	{
+		//if (it->first != "")
         mmTop.insert( pair<int,string>(it->second,it->first) );
     }
 
@@ -94,7 +89,6 @@ TopTen::~TopTen ( )
 #ifdef MAP
     cout << "Appel au destructeur de <TopTen>" << endl;
 #endif
-//    delete mmTop;
 
 } //----- Fin de ~TopTen
 

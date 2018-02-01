@@ -16,6 +16,8 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Graphe.h"
+#include "Log.h"
+#include "Logfile.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -281,7 +283,7 @@ void Graphe::CreerFichier (string nomFichierDot)
 			map<string,int>::const_iterator citNoeud;
 			for (citNoeud = noeud.begin(); citNoeud != noeud.cend(); citNoeud++)
 			{
-				fichier << "node" << citNoeud->second << "[label=\"" << citNoeud->first << "\"];\r\n";
+				fichier << "\tnode" << citNoeud->second << "[label=\"" << citNoeud->first << "\"];\r\n";
 			}
 
 			multimap<string,pair<string,int>>::const_iterator citArc;
@@ -289,9 +291,9 @@ void Graphe::CreerFichier (string nomFichierDot)
 			{
 				map<string,int>::const_iterator citSource = noeud.find(citArc->first);
 				map<string,int>::const_iterator citCible = noeud.find(citArc->second.first);
-				fichier << "node" << citSource->second << " -> node" << citCible->second << " [label=\"" << citArc->second.second << "\"];\r\n";
-
+				fichier << "\tnode" << citSource->second << " -> node" << citCible->second << " [label=\"" << citArc->second.second << "\"];\r\n";
 			}
+			fichier << "}";
 		}
 		else
 		{
@@ -307,22 +309,11 @@ void Graphe::CreerFichier (string nomFichierDot)
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-Graphe & Graphe::operator = ( const Graphe & unGraphe )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
+
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Graphe::Graphe ( const Graphe & unGraphe )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Graphe>" << endl;
-#endif
-} //----- Fin de Graphe (constructeur de copie)
+
 
 
 Graphe::Graphe ( )

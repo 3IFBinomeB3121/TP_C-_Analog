@@ -15,6 +15,8 @@
 using namespace std;
 #include <iostream>
 #include <string>
+#include <sstream>
+#include <cstring>
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types

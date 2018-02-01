@@ -4,7 +4,7 @@ LIBS=
 RM=rm
 CLEAN=raz
 EXEC=analog
-CXXFLAGS=-W -std=c++11 -std=gnu++11  -Wall -ansi -pedantic -D MAP
+CXXFLAGS=-W -std=c++11 -std=gnu++11  -Wall -pedantic
 EDLFLAGS=
 RMFLAGS = -f
 OBJ=main.o Logfile.o Log.o Stockage.o Commande.o Graphe.o TopTen.o 
@@ -15,7 +15,7 @@ $(EXEC) : $(OBJ)
 	$(EDL) -o $(EXEC) $(OBJ)
 
 #Création de main.o
-main.o : main.cpp Commande.h Stockage.h Logfile.h Log.h
+main.o : main.cpp Commande.h
 	echo "Comp de main"
 	$(COMP) -c main.cpp $(CXXFLAGS)
 
@@ -30,12 +30,12 @@ Log.o : Log.cpp Log.h
 	$(COMP) -c Log.cpp $(CXXFLAGS)
 
 #Créer un fichier objet Commande.o
-Commande.o : Commande.cpp Commande.h 
+Commande.o : Commande.cpp Commande.h Stockage.h Graphe.h
 	echo "Compilation de Commande" 
 	$(COMP) -c Commande.cpp $(CXXFLAGS)
 
 #Créer un fichier objet Stockage.o
-Stockage.o : Stockage.cpp Stockage.h
+Stockage.o : Stockage.cpp Stockage.h TopTen.h Logfile.h
 	echo "Compilation de Stockage" 
 	$(COMP) -c Stockage.cpp $(CXXFLAGS)
 
@@ -45,7 +45,7 @@ TopTen.o : TopTen.cpp TopTen.h
 	$(COMP) -c TopTen.cpp $(CXXFLAGS)
 
 #Créer un fichier objet Graphe.o
-Graphe.o : Graphe.cpp Graphe.h
+Graphe.o : Graphe.cpp Graphe.h Log.h Logfile.h
 	echo "Compilation de Graphe"
 	$(COMP) -c Graphe.cpp $(CXXFLAGS)
 

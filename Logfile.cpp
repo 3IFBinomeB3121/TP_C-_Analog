@@ -51,22 +51,10 @@ bool Logfile::eof()
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-//Logfile & Logfile::operator = ( const Logfile & unLogfile )
-// Algorithme :
-//
-//{
-//} //----- Fin de operator =
+
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Logfile::Logfile ( const Logfile & unLogfile )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Logfile>" << endl;
-#endif
-} //----- Fin de Logfile (constructeur de copie)
 
 
 Logfile::Logfile (string nomFichier)

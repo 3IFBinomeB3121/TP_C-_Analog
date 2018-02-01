@@ -16,8 +16,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Log.h"
-#include <sstream>
-#include <cstring>
+
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
@@ -53,23 +52,13 @@ int Log::GetHeure()
     return heure;
 }
 //------------------------------------------------- Surcharge d'opérateurs
-//Log & Log::operator = ( const Log & unLog )
-// Algorithme :
-////----- Fin de operator =
 
 
 
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Log::Log ( const Log & unLog )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Log>" << endl;
-#endif
-} //----- Fin de Log (constructeur de copie)
+
 
 
 Log::Log (string ligneFichier)
@@ -87,8 +76,6 @@ Log::Log (string ligneFichier)
 	getline(ss,date,':');
 	ss>>heure;
 	ss.get();
-	//getline(ss,heureAconvertir,':');
-	//heure = stoi(heureAconvertir);
 	ss.get();ss.get();ss.get();ss.get();ss.get();ss.get(); // On saute tous les caractères jusqu'a avant '+'
 	char signe = ' ';
 	ss.get(signe);
@@ -100,18 +87,26 @@ Log::Log (string ligneFichier)
 	getline(ss,cible,' ');
 	getline(ss,protocole,'"');
 	ss.get();
-	string status;
 	ss>>status_code;
 	ss.get();
 	ss>>nbOctet;
 	ss.get();ss.get();
-	string recupProtocole;
-	getline(ss,recupProtocole,'/');
-	ss.get(); // On saute le deuxième slash
-	getline(ss,referent,'/');
-	referent = recupProtocole + "//" + referent;
-	getline(ss,source,'"');
-	source = "/" + source;
+	if (ss.peek() == '-')
+	{
+		referent = "referentInconnu";
+		source = "unknown";
+		ss.get();ss.get();
+	}
+	else 
+	{
+		string recupProtocole;
+		getline(ss,recupProtocole,'/');
+		ss.get(); // On saute le deuxième slash
+		getline(ss,referent,'/');
+		referent = recupProtocole + "//" + referent;
+		getline(ss,source,'"');
+		source = "/" + source;
+	}
 	ss.get();ss.get();
 	getline(ss,id_client_navigateur,'"');
 

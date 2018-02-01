@@ -123,7 +123,7 @@ void Stockage::RemplirMapHeure(int heureChoisie, string nomFichier)
 void Stockage::RemplirMapSansCond(string nomFichier)
 {
     Logfile lf(nomFichier);
-    if (lf.is_open() && heure != -1)
+    if (lf.is_open())
     {
         while (!lf.eof())
         {
@@ -148,27 +148,23 @@ void Stockage::RemplirMapSansCond(string nomFichier)
 
 void Stockage::AfficherTop()
 {
-    TopTen ttexclu(stockLog);
-    cout << ttexclu; // Surcharger operator <<*/
+	if (stockLog.size() == 0)
+	{
+		cout << "Le fichier est vide et ne contient aucun log ou alors il n'existe pas" << endl;
+	}
+	else
+	{
+		TopTen ttexclu(stockLog);
+		cout << ttexclu; 
+	}
 }
 
 //------------------------------------------------- Surcharge d'opérateurs
-Stockage & Stockage::operator = ( const Stockage & unStockage )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
+
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Stockage::Stockage ( const Stockage & unStockage )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Stockage>" << endl;
-#endif
-} //----- Fin de Stockage (constructeur de copie)
+
 
 
 Stockage::Stockage ()

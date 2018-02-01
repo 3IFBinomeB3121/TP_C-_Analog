@@ -13,11 +13,13 @@
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
+#include <sstream>
 
 //------------------------------------------------------ Include personnel
 #include "Commande.h"
 #include "Stockage.h"
 #include "Graphe.h"
+
 
 //------------------------------------------------------------- Constantes
 
@@ -64,19 +66,29 @@ void Commande::Choisir()
         }
         else
         {
-            cerr << "Problème : aucune option détectée";
+            cerr << "Problème : aucune option détectée" << endl;
         }
 
         switch (nombreArg)
         {
             case 3:
             {
-                Stockage stockExclus;
-                stockExclus.RemplirMapExclus(option[nombreArg-1]);
-                stockExclus.AfficherTop();
-                // Ne peut être que exclure
-                break;
+				if (exclure)
+				{
+					Stockage stockExclus;
+					stockExclus.RemplirMapExclus(option[nombreArg-1]);
+					cout << "Affichage avec les fichiers '.css', '.jpg', '.png' et '.js' exclus" << endl;
+					stockExclus.AfficherTop();
+					// Ne peut être que exclure
+					break;
+				}
+				else
+				{
+					cout << "option rentrée non valide" << endl;
+				}
+				break;
             }
+            
 
             case 4:
             {
@@ -92,12 +104,13 @@ void Commande::Choisir()
                         S.RemplirMapSansCond(option[nombreArg-1]);
                         S.AfficherTop();
                         Graphe G;
+                        cout << "fichier " << nomFichierDot << " créé" << endl;
                         G.RemplirGrapheSansCond(option[nombreArg-1]);
                         G.CreerFichier(nomFichierDot);
                     }
                     else
                     {
-                        cout << "extension du fichier n'est pas valide (ce n'est pas un fichier dot)" << endl;
+                        cerr << "extension du fichier n'est pas valide (ce n'est pas un fichier dot)" << endl;
                     }
 
                 }
@@ -106,9 +119,9 @@ void Commande::Choisir()
                     int valideHeure = VerifierHeure(optionHeure);
                     if (valideHeure != -1)
                     {
-                        // Afficher top 10 pour l'heure.
                         Stockage stockHeure;
                         stockHeure.RemplirMapHeure(valideHeure,option[nombreArg-1]);
+                        cout << "Affichage pour un intervalle compris entre " << valideHeure<< "h00 et " << valideHeure << "h59" << endl;
                         stockHeure.AfficherTop();
                     }
                     else
@@ -118,7 +131,7 @@ void Commande::Choisir()
                 }
                 else
                 {
-                    cerr << "aucune option connue" << endl;
+                    cerr << "aucune option connue ou option rentrée plusieurs fois" << endl;
                 }
                 break;
             }
@@ -136,14 +149,16 @@ void Commande::Choisir()
                         {
                             Stockage S;
                             S.RemplirMapExclus(option[nombreArg-1]);
+                            cout << "Affichage avec les fichiers '.css', '.jpg', '.png' et '.js' exclus" << endl;
                             S.AfficherTop();
                             Graphe G;
+                            cout << "fichier " << nomFichierDot << " créé" << endl;
                             G.RemplirGrapheExclus(option[nombreArg-1]);
                             G.CreerFichier(nomFichierDot);
                         }
                         else
                         {
-                            cerr << "Le fichier indiqué ne contient pas la bonne extension (dot)";
+                            cerr << "Le fichier indiqué ne contient pas la bonne extension (dot)" << endl;
                         }
 
                     }
@@ -155,6 +170,7 @@ void Commande::Choisir()
                             // Afficher top 10 pour l'heure.
                             Stockage stockHeureExclus;
                             stockHeureExclus.RemplirMapExclusHeure(valideHeure, option[nombreArg-1]);
+                            cout << "Affichage avec les fichiers '.png', '.css', '.js' et '.jpg' exclus pour un horaire compris entre " << valideHeure << "h00 et " << valideHeure << "h59" << endl;
                             stockHeureExclus.AfficherTop();
                         }
                         else
@@ -164,7 +180,7 @@ void Commande::Choisir()
                     }
                     else
                     {
-                        cerr << "option inconnue";
+                        cerr << "option inconnue ou options rentrées plusieurs fois" << endl;
                     }
                     break;
                 }
@@ -179,13 +195,16 @@ void Commande::Choisir()
                     //Tracer graphe en fonction de l'heure choisie
                     Stockage S;
                     S.RemplirMapHeure(valideH, option[nombreArg-1]);
+                    cout << "Affichage pour un intervalle compris entre " << valideH << "h00 et " << valideH << "h59" << endl;
+                    S.AfficherTop();
                     Graphe G;
+                    cout << "fichier " << nomFichierDot << " créé" << endl;
                     G.RemplirGrapheExclusHeure(valideH, option[nombreArg-1]);
                     G.CreerFichier(nomFichierDot);
                 }
                 else
                 {
-                    cout << "erreur dans l'extension du fichier Dot ou l'heure choisie" << endl;
+                    cerr << "Erreur dans l'extension du fichier Dot , l'heure choisie ou les options rentrees" << endl;
                 }
 
                 // Forcement heure et graphe sinon options inconnues
@@ -203,14 +222,16 @@ void Commande::Choisir()
                     //Tracer graphe en fonction de l'heure choisie et avec exclus
                     Stockage S;
                     S.RemplirMapExclusHeure(valideHeu,option[nombreArg-1]);
+                    cout << "Affichage avec les fichiers '.png', '.css', '.js' et '.jpg' exclus pour un horaire compris entre " << valideHeu << "h00 et " << valideHeu << "h59" << endl;
                     S.AfficherTop();
                     Graphe G;
+                    cout << "fichier " << nomFichierDot << " créé" << endl;
                     G.RemplirGrapheExclusHeure(valideHeu,option[nombreArg-1]);
                     G.CreerFichier(nomFichierDot);
                 }
                 else
                 {
-                    cout << "erreur dans l'extension du fichier Dot ou l'heure choisie" << endl;
+                    cerr << "erreur dans l'extension du fichier Dot, l'heure choisie ou les options rentrees" << endl;
                 }
                 break;
             }
@@ -218,28 +239,16 @@ void Commande::Choisir()
     }
     else
     {
-        cerr << "Fichier passé en option n'est pas du type Log" << endl;
+        cerr << "Fichier log passé en option n'a pas la bonne extension" << endl;
     }
 }
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-Commande & Commande::operator = ( const Commande & unCommande )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
+
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Commande::Commande ( const Commande & unCommande )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Commande>" << endl;
-#endif
-} //----- Fin de Commande (constructeur de copie)
 
 
 Commande::Commande (int nbArg, char ** arg)
@@ -275,10 +284,14 @@ Commande::~Commande ( )
 bool Commande::VerifierExtensionLog(string nomFichierLog)
 {
     stringstream ss(nomFichierLog);
-    string nom;
     string extension;
-    getline(ss,nom,'.');
+    ss.seekg(0,ss.end); // Permet de recuperer l'extension au cas ou il y aurait un chemin relatif ou absolu
+    long taille = ss.tellg();
+    ss.seekg(0);
+    char * buffer = new char[taille-3];
+    ss.read(buffer,taille-3);
     getline(ss,extension);
+    delete [] buffer;
     if (extension == "log")
     {
         return true;
@@ -294,40 +307,38 @@ bool Commande::OptExclure()
     int i;
     for (i=1; i < nombreArg; i+=2)
     {
-        if (option[i][1] == 'e')
+        if (strlen(option[i]) == 2 && option[i][1] == 'e')
         {
             return true;
         }
     }
     return false;
-    /*if (nombreArg==2 && option[1][1] == 'e')
-    {
-        return true;
-    }
-    // Pas de cas nombreArg=3 ou 5 car les deux autres options prennent deux arguments donc pas possible
-    else if (nombreArg == 4 && (option[1][1] == 'e' || option[3][1] == 'e'))
-    {
-        return true;
-    }
-    else if (nombreArg==6 && (option[1][1] == 'e' || option[3][1] == 'e' || option[5][1] == 'e'))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }*/
 }
 
 int Commande::VerifierHeure(int horaire) // Retourne l'heure si elle est valide sinon -1
 {
-	cout << option[horaire] << endl;
-	cout << option[horaire+1] << endl;
-    int heureAverif = stoi(option[horaire+1]);
-    cout << "heure : " << heureAverif << endl;
-    if (0<= heureAverif && heureAverif<24)
+    string heureAverif = option[horaire+1];
+	stringstream ss(heureAverif);
+	// Essaye de caster <unString> en un entier
+	int nombre;
+	ss >> nombre;
+	// Renvoie -1 si impossible
+	if (ss.fail())
+	{
+		return -1;
+	}
+
+	// Vérifie que <unString> ne contient qu'un entier
+	string verif;
+	ss >> verif;
+	if (!verif.empty())
+	{
+		return -1;
+	}
+		
+    if (0<= nombre && nombre<24)
     {
-        return heureAverif;
+        return nombre;
     }
     else
     {
@@ -338,11 +349,14 @@ int Commande::VerifierHeure(int horaire) // Retourne l'heure si elle est valide 
 bool Commande::VerifierExtensionDot(string nomFichierDot)
 {
     stringstream ss(nomFichierDot);
-    string nom;
     string extension;
-    // faire attention si fichier relatif
-    getline(ss,nom,'.');
+    ss.seekg(0,ss.end); // Permet de recuperer l'extension au cas ou il y aurait un chemin relatif ou absolu
+    long taille = ss.tellg();
+    ss.seekg(0);
+    char * buffer = new char[taille-3];
+    ss.read(buffer,taille-3);
     getline(ss,extension);
+    delete [] buffer;
     if (extension == "dot")
     {
         return true;
@@ -360,7 +374,7 @@ int Commande::OptTracerGraphe()
     int i;
     for (i=1; i<nombreArg-1; i++)
     {
-        if (option[i][1] == 'g')
+        if (strlen(option[i]) == 2 && option[i][1] == 'g')
         {
             return i;
         }
@@ -375,7 +389,7 @@ int Commande::OptHeure()
     int i;
     for (i=1; i<nombreArg-1; i++)
     {
-        if (option[i][1] == 't')
+        if (strlen(option[i]) == 2 && option[i][1] == 't')
         {
             return i;
         }
