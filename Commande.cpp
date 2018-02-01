@@ -307,7 +307,7 @@ bool Commande::OptExclure()
     int i;
     for (i=1; i < nombreArg; i+=2)
     {
-        if (strlen(option[i]) == 2 && option[i][1] == 'e')
+        if (strlen(option[i]) == 2 && !strcmp(option[i],"-e"))
         {
             return true;
         }
@@ -374,7 +374,7 @@ int Commande::OptTracerGraphe()
     int i;
     for (i=1; i<nombreArg-1; i++)
     {
-        if (strlen(option[i]) == 2 && option[i][1] == 'g')
+        if (strlen(option[i]) == 2 && !strcmp(option[i],"-g"))
         {
             return i;
         }
@@ -389,7 +389,7 @@ int Commande::OptHeure()
     int i;
     for (i=1; i<nombreArg-1; i++)
     {
-        if (strlen(option[i]) == 2 && option[i][1] == 't')
+        if (strlen(option[i]) == 2 && !strcmp(option[i],"-t"))
         {
             return i;
         }
