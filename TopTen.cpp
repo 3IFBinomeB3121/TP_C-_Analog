@@ -1,9 +1,10 @@
 /*************************************************************************
                            TopTen  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 10/01/2018
+    copyright            : (C) 2018 par Christophe ETIENNE & William Occeli
+    e-mail               : christophe.etienne@insa-lyon.fr
+                           william.occeli@insa-lyon.fr
 *************************************************************************/
 
 //---------- Réalisation de la classe <TopTen> (fichier TopTen.cpp) ------------
@@ -22,11 +23,9 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type TopTen::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
+
+//------------------------------------------------- Surcharge d'opérateurs
+
 ostream & operator << (ostream & flux, const TopTen & unTopTen)
 {
     multimap<int,string>::const_reverse_iterator it;
@@ -55,15 +54,9 @@ ostream & operator << (ostream & flux, const TopTen & unTopTen)
         }
     }
     return flux;
-}
-
-//------------------------------------------------- Surcharge d'opérateurs
-
-
+} //----- Fin de operator <<
 
 //-------------------------------------------- Constructeurs - destructeur
-
-
 
 TopTen::TopTen ( const unordered_map<string,int> unM )
 // Algorithme :
@@ -90,7 +83,6 @@ TopTen::~TopTen ( )
 #endif
 
 } //----- Fin de ~TopTen
-
 
 //------------------------------------------------------------------ PRIVE
 

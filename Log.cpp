@@ -1,9 +1,10 @@
 /*************************************************************************
                            Log  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 10/01/2018
+    copyright            : (C) 2018 par Christophe ETIENNE & William Occeli
+    e-mail               : christophe.etienne@insa-lyon.fr
+                           william.occeli@insa-lyon.fr
 *************************************************************************/
 
 //---------- Réalisation de la classe <Log> (fichier Log.cpp) ------------
@@ -22,11 +23,7 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Log::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
+
 string Log::GetExtension()
 {
     stringstream ss(cible);
@@ -51,85 +48,8 @@ int Log::GetHeure()
 {
     return heure;
 }
+
 //------------------------------------------------- Surcharge d'opérateurs
-
-
-
-
-
-//-------------------------------------------- Constructeurs - destructeur
-
-
-
-Log::Log (string ligneFichier)
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de <Log>" << endl;
-#endif
-	stringstream ss(ligneFichier);
-	getline(ss,adresseIP,' ');
-	getline(ss,nom_visiteur,' ');
-	getline(ss,pseudo,' ');
-	ss.get();
-	getline(ss,date,':');
-	ss>>heure;
-	ss.get();
-	ss.get();ss.get();ss.get();ss.get();ss.get();ss.get(); // On saute tous les caractères jusqu'a avant '+'
-	char signe = ' ';
-	ss.get(signe);
-	int fuseau;
-	ss>>fuseau;
-	fuseau = fuseau/100;
-	ss.get();ss.get();ss.get();
-	getline(ss,methode,' ');
-	getline(ss,cible,' ');
-	getline(ss,protocole,'"');
-	ss.get();
-	ss>>status_code;
-	ss.get();
-	ss>>nbOctet;
-	ss.get();ss.get();
-	if (ss.peek() == '-')
-	{
-		referent = "referentInconnu";
-		source = "unknown";
-		ss.get();ss.get();
-	}
-	else 
-	{
-		string recupProtocole;
-		getline(ss,recupProtocole,'/');
-		ss.get(); // On saute le deuxième slash
-		getline(ss,referent,'/');
-		referent = recupProtocole + "//" + referent;
-		getline(ss,source,'"');
-		source = "/" + source;
-	}
-	ss.get();ss.get();
-	getline(ss,id_client_navigateur,'"');
-
-	if (signe=='-')
-	{
-		heure = heure + fuseau;
-	}
-	else
-	{
-		heure = heure - fuseau;
-	}
-} //----- Fin de Log
-
-
-Log::~Log ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au destructeur de <Log>" << endl;
-#endif
-} //----- Fin de ~Log
-
 
 ostream & operator << (ostream & flux, const Log & unLog)
 // Algorithme :
@@ -151,6 +71,75 @@ ostream & operator << (ostream & flux, const Log & unLog)
 	return flux;
 
 }
+
+//-------------------------------------------- Constructeurs - destructeur
+
+Log::Log (string ligneFichier)
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <Log>" << endl;
+#endif
+	stringstream ss(ligneFichier);
+	getline(ss,adresseIP,' ');
+	getline(ss,nom_visiteur,' ');
+	getline(ss,pseudo,' ');
+	ss.get();
+	getline(ss,date,':');
+	ss>>heure;
+	ss.get();ss.get();ss.get();ss.get();ss.get();ss.get();ss.get();
+	char signe = ' ';
+	ss.get(signe);
+	int fuseau;
+	ss>>fuseau;
+	fuseau = fuseau/100;
+	ss.get();ss.get();ss.get();
+	getline(ss,methode,' ');
+	getline(ss,cible,' ');
+	getline(ss,protocole,'"');
+	ss.get();
+	ss>>status_code;
+	ss.get();
+	ss>>nbOctet;
+	ss.get();ss.get();
+	if (ss.peek() == '-')
+	{
+		referent = "referentInconnu";
+		source = "unknown";
+		ss.get();ss.get();
+	}
+	else
+	{
+		string recupProtocole;
+		getline(ss,recupProtocole,'/');
+		ss.get(); // On saute le deuxième slash
+		getline(ss,referent,'/');
+		referent = recupProtocole + "//" + referent;
+		getline(ss,source,'"');
+		source = "/" + source;
+	}
+	ss.get();ss.get();
+	getline(ss,id_client_navigateur,'"');
+	if (signe=='-')
+	{
+		heure = heure + fuseau;
+	}
+	else
+	{
+		heure = heure - fuseau;
+	}
+} //----- Fin de Log
+
+
+Log::~Log ( )
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au destructeur de <Log>" << endl;
+#endif
+} //----- Fin de ~Log
 
 //------------------------------------------------------------------ PRIVE
 

@@ -1,9 +1,10 @@
 /*************************************************************************
                            Graphe  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 10/01/2018
+    copyright            : (C) 2018 par Christophe ETIENNE & William Occeli
+    e-mail               : christophe.etienne@insa-lyon.fr
+                           william.occeli@insa-lyon.fr
 *************************************************************************/
 
 //---------- Réalisation de la classe <Graphe> (fichier Graphe.cpp) ------------
@@ -24,11 +25,7 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Graphe::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
+
 void Graphe::RemplirGrapheSansCond(string nomFichier)
 {
 	Logfile lf(nomFichier);
@@ -84,7 +81,7 @@ void Graphe::RemplirGrapheSansCond(string nomFichier)
 	{
 		cerr << "erreur lors de l'ouverture du fichier" << endl;
 	}
-}
+} // Fin de RemplirGrapheSansCond
 
 void Graphe::RemplirGrapheHeure(int heureChoisie, string nomFichier)
 {
@@ -104,7 +101,7 @@ void Graphe::RemplirGrapheHeure(int heureChoisie, string nomFichier)
                 elmt = noeud.insert(make_pair(source,compteur));
                 if (elmt.second)
                 {
-                    compteur++;  // S'il a bien été ajouté on incrémente le compteur
+                    compteur++;
                 }
                 elmt = noeud.insert(make_pair(cible,compteur));
                 if (elmt.second)
@@ -145,7 +142,7 @@ void Graphe::RemplirGrapheHeure(int heureChoisie, string nomFichier)
 	{
 		cerr << "erreur lors de l'ouverture du fichier ou dans l'heure rentrée en option" << endl;
 	}
-}
+} // Fin de RemplirGrapheHeure
 
 void Graphe::RemplirGrapheExclus(string nomFichier)
 {
@@ -165,7 +162,7 @@ void Graphe::RemplirGrapheExclus(string nomFichier)
                 elmt = noeud.insert(make_pair(source,compteur));
                 if (elmt.second)
                 {
-                    compteur++;  // S'il a bien été ajouté on incrémente le compteur
+                    compteur++;
                 }
                 elmt = noeud.insert(make_pair(cible,compteur));
                 if (elmt.second)
@@ -206,7 +203,7 @@ void Graphe::RemplirGrapheExclus(string nomFichier)
 	{
 		cerr << "erreur lors de l'ouverture du fichier" << endl;
 	}
-}
+} // Fin de RemplirGrapheExclus
 
 void Graphe::RemplirGrapheExclusHeure(int heureChoisie, string nomFichier)
 {
@@ -227,7 +224,7 @@ void Graphe::RemplirGrapheExclusHeure(int heureChoisie, string nomFichier)
                 elmt = noeud.insert(make_pair(source,compteur));
                 if (elmt.second)
                 {
-                    compteur++;  // S'il a bien été ajouté on incrémente le compteur
+                    compteur++;
                 }
                 elmt = noeud.insert(make_pair(cible,compteur));
                 if (elmt.second)
@@ -268,7 +265,7 @@ void Graphe::RemplirGrapheExclusHeure(int heureChoisie, string nomFichier)
 	{
 		cerr << "erreur lors de l'ouverture du fichier ou dans l'heure passé en option" << endl;
 	}
-}
+} // Fin de RemplirGrapheExclusHeure
 
 void Graphe::CreerFichier (string nomFichierDot)
 {
@@ -313,16 +310,11 @@ void Graphe::CreerFichier (string nomFichierDot)
 	{
 		cerr << "Fichier non précisé" << endl;
 	}
-}
-
+} // Fin de CreerFichier
 
 //------------------------------------------------- Surcharge d'opérateurs
 
-
-
 //-------------------------------------------- Constructeurs - destructeur
-
-
 
 Graphe::Graphe ( )
 // Algorithme :
@@ -344,7 +336,6 @@ Graphe::~Graphe ( )
     cout << "Appel au destructeur de <Graphe>" << endl;
 #endif
 } //----- Fin de ~Graphe
-
 
 //------------------------------------------------------------------ PRIVE
 

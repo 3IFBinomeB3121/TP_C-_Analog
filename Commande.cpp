@@ -1,9 +1,10 @@
 /*************************************************************************
                            Commande  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 10/01/2018
+    copyright            : (C) 2018 par Christophe ETIENNE & William Occeli
+    e-mail               : christophe.etienne@insa-lyon.fr
+                           william.occeli@insa-lyon.fr
 *************************************************************************/
 
 //---------- Réalisation de la classe <Commande> (fichier Commande.cpp) ------------
@@ -20,23 +21,14 @@ using namespace std;
 #include "Stockage.h"
 #include "Graphe.h"
 
-
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Commande::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
 
 void Commande::Choisir()
 {
-    // 3 methodes qui retourne un booleen et en fonction du nombre d'argument verifie si l'option est bonne ou non
-    // Si arg > 1 appelle des méthodes et si tous les booleens sont faux alors retourne une erreur "option" inconnue
-    // Sinon si arg = 1 afficher top 10
     bool fichierLogValide = VerifierExtensionLog(option[nombreArg-1]);
     if (fichierLogValide)
     {
@@ -72,13 +64,13 @@ void Commande::Choisir()
         {
             case 3:
             {
+                // Ne peut être que l'option exclure '-e'
 				if (exclure)
 				{
 					Stockage stockExclus;
 					stockExclus.RemplirMapExclus(option[nombreArg-1]);
 					cout << "Affichage avec les fichiers '.css', '.jpg', '.png' et '.js' exclus" << endl;
 					stockExclus.AfficherTop();
-					// Ne peut être que exclure
 					break;
 				}
 				else
@@ -88,17 +80,15 @@ void Commande::Choisir()
 				break;
             }
 
-
             case 4:
             {
+                // Ne peut être que l'option '-g nomFichier.dot' ou '-t heure'
                 if (tracerGraphe)
                 {
                     string nomFichierDot = option[tracerGraphe+1];
                     bool valideExt = VerifierExtensionDot(nomFichierDot);
                     if (valideExt)
                     {
-						// Faire methode pour exclus, heure et les 2 comme pour stockage ...
-                        //Tracer graphe mais en stockant d'abord grace a stockage puis en faisant appel a remplir graphe
                         Stockage S;
                         S.RemplirMapSansCond(option[nombreArg-1]);
                         S.AfficherTop();
@@ -134,13 +124,12 @@ void Commande::Choisir()
                 break;
             }
 
-
             case 5:
                 {
-                    // Ne peut être que exclure et soit heure soit graphe sinon options inconnues
+                    // Ne peut être que l'option '-e' et soit l'option '-g nomfichier.dot'
+                    // ou l'option '-t heure'
                     if (exclure && tracerGraphe)
                     {
-                        // Tracer graphe avec les fichiers exclus
                         string nomFichierDot = option[tracerGraphe+1];
                         bool valideExt = VerifierExtensionDot(nomFichierDot);
                         if (valideExt)
@@ -157,7 +146,6 @@ void Commande::Choisir()
                         {
                             cerr << "Le fichier indiqué ne contient pas la bonne extension (dot)" << endl;
                         }
-
                     }
                     else if (exclure && optionHeure)
                     {
@@ -184,12 +172,12 @@ void Commande::Choisir()
 
             case 6:
             {
+                // Ne peut être que les options 't heure' et '-g nomfichier.dot'
                 int valideH = VerifierHeure(optionHeure);
                 string nomFichierDot = option[tracerGraphe+1];
                 bool valideEx = VerifierExtensionDot(nomFichierDot);
                 if (valideEx && valideH != -1)
                 {
-                    //Tracer graphe en fonction de l'heure choisie
                     Stockage S;
                     S.RemplirMapHeure(valideH, option[nombreArg-1]);
                     cout << "Affichage pour un intervalle compris entre " << valideH << "h00 et " << valideH << "h59" << endl;
@@ -202,20 +190,17 @@ void Commande::Choisir()
                 {
                     cerr << "Erreur dans l'extension du fichier Dot , l'heure choisie ou les options rentrees" << endl;
                 }
-
-                // Forcement heure et graphe sinon options inconnues
                 break;
             }
 
             case 7:
             {
-                // obligatoirement les 3 ou erreurs options inconnues
+                // obligatoirement les 3 options
                 int valideHeu = VerifierHeure(optionHeure);
                 string nomFichierDot = option[tracerGraphe+1];
                 bool valideExtent = VerifierExtensionDot(nomFichierDot);
                 if (valideExtent && valideHeu != -1)
                 {
-                    //Tracer graphe en fonction de l'heure choisie et avec exclus
                     Stockage S;
                     S.RemplirMapExclusHeure(valideHeu,option[nombreArg-1]);
                     cout << "Affichage avec les fichiers '.png', '.css', '.js' et '.jpg' exclus pour un horaire compris entre " << valideHeu << "h00 et " << valideHeu << "h59" << endl;
@@ -236,8 +221,7 @@ void Commande::Choisir()
     {
         cerr << "Fichier log passé en option n'a pas la bonne extension" << endl;
     }
-}
-
+} //----- Fin de Choisir
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -296,7 +280,7 @@ bool Commande::VerifierExtensionLog(string nomFichierLog)
     {
         return false;
     }
-}
+} //----- Fin de VerifierExtensionLog
 
 bool Commande::OptExclure()
 {
@@ -309,7 +293,7 @@ bool Commande::OptExclure()
         }
     }
     return false;
-}
+} //----- Fin de OptExclure
 
 int Commande::VerifierHeure(int horaire) // Retourne l'heure si elle est valide sinon -1
 {
@@ -340,7 +324,7 @@ int Commande::VerifierHeure(int horaire) // Retourne l'heure si elle est valide 
     {
         return -1;
     }
-}
+} //----- Fin de VerifierHeure
 
 bool Commande::VerifierExtensionDot(string nomFichierDot)
 {
@@ -368,7 +352,7 @@ bool Commande::VerifierExtensionDot(string nomFichierDot)
     {
         return false;
     }
-}
+} //----- Fin de VerifierExtensionDot
 
 int Commande::OptTracerGraphe()
 // Retourne l'indice ou se trouve l'option (pour pouvoir recuperer le nom du fichier dans choisir)
@@ -383,7 +367,7 @@ int Commande::OptTracerGraphe()
         }
     }
     return 0;
-}
+} //----- Fin de OptTracerGraphe
 
 int Commande::OptHeure()
 // Retourne l'indice ou se trouve l'option (pour pouvoir recuperer l'heure dans Choisir)
@@ -398,7 +382,8 @@ int Commande::OptHeure()
         }
     }
     return 0;
-}
+} //----- Fin de OptHeure
+
+//------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

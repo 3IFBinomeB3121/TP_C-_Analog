@@ -1,9 +1,10 @@
 /*************************************************************************
                            Stockage  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 10/01/2018
+    copyright            : (C) 2018 par Christophe ETIENNE & William Occeli
+    e-mail               : christophe.etienne@insa-lyon.fr
+                           william.occeli@insa-lyon.fr
 *************************************************************************/
 
 //---------- Réalisation de la classe <Stockage> (fichier Stockage.cpp) ------------
@@ -24,11 +25,6 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Stockage::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
 
 void Stockage::RemplirMapExclus(string nomFichier)
 {
@@ -52,14 +48,12 @@ void Stockage::RemplirMapExclus(string nomFichier)
                 }
             }
         }
-        // Permet d'effacer le tuple en cas de log ajouté sans valeur de clé
-        //stockLog.erase(stockLog.find(""));  
     }
     else
     {
         cerr << "Erreur lors de l'ouverture du fichier" << endl;
     }
-}
+} //----- Fin de RemplirMapExclus
 
 void Stockage::RemplirMapExclusHeure(int heureChoisie, string nomFichier)
 {
@@ -84,14 +78,12 @@ void Stockage::RemplirMapExclusHeure(int heureChoisie, string nomFichier)
                 }
             }
         }
-        // Permet d'effacer le tuple en cas de log ajouté sans valeur de clé
-		//stockLog.erase(stockLog.find(""));
     }
     else
     {
         cerr << "Erreur lors de l'ouverture du fichier" << endl;
     }
-}
+} //----- Fin de RemplirMapExclusHeure
 
 void Stockage::RemplirMapHeure(int heureChoisie, string nomFichier)
 {
@@ -113,16 +105,14 @@ void Stockage::RemplirMapHeure(int heureChoisie, string nomFichier)
                 {
                     stockLog.find(cible)->second++;
                 }
-            }    
+            }
         }
-        // Permet d'effacer le tuple en cas de log ajouté sans valeur de clé
-		// stockLog.erase(stockLog.find(""));
     }
     else
     {
         cerr << "Erreur lors de l'ouverture du fichier" << endl;
     }
-}
+} //----- Fin de RemplirMapHeure
 
 void Stockage::RemplirMapSansCond(string nomFichier)
 {
@@ -142,15 +132,12 @@ void Stockage::RemplirMapSansCond(string nomFichier)
                 stockLog.find(cible)->second++;
             }
         }
-        // Permet d'effacer le tuple en cas de log ajouté sans valeur de clé
-        //stockLog.erase(stockLog.find(""));
     }
     else
     {
         cerr << "Erreur lors de l'ouverture du fichier" << endl;
     }
-
-}
+} //----- Fin de RemplirMapSansCond
 
 void Stockage::AfficherTop()
 {
@@ -161,17 +148,13 @@ void Stockage::AfficherTop()
 	else
 	{
 		TopTen ttexclu(stockLog);
-		cout << ttexclu; 
+		cout << ttexclu;
 	}
-}
+} //----- Fin de AfficherTop
 
 //------------------------------------------------- Surcharge d'opérateurs
 
-
-
 //-------------------------------------------- Constructeurs - destructeur
-
-
 
 Stockage::Stockage ()
 // Algorithme :
@@ -182,7 +165,6 @@ Stockage::Stockage ()
 #endif
 } //----- Fin de Stockage
 
-
 Stockage::~Stockage ( )
 // Algorithme :
 //
@@ -191,7 +173,6 @@ Stockage::~Stockage ( )
     cout << "Appel au destructeur de <Stockage>" << endl;
 #endif
 } //----- Fin de ~Stockage
-
 
 //------------------------------------------------------------------ PRIVE
 

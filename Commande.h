@@ -1,9 +1,10 @@
 /*************************************************************************
                            Commande  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 10/01/2018
+    copyright            : (C) 2018 par Christophe ETIENNE & William Occeli
+    e-mail               : christophe.etienne@insa-lyon.fr
+                           william.occeli@insa-lyon.fr
 *************************************************************************/
 
 //---------- Interface de la classe <Commande> (fichier Commande.h) ----------------
@@ -14,7 +15,6 @@
 
 using namespace std;
 #include <string.h>
-
 
 //------------------------------------------------------------- Constantes
 
@@ -66,6 +66,50 @@ public:
     // Contrat :
     //
 
+
+//------------------------------------------------- Surcharge d'opérateurs
+    Commande & operator = ( const Commande & unCommande );
+    // Mode d'emploi :
+    // La surchage d'operator = est juste déclaré.
+    //
+    // Contrat :
+    //
+
+
+
+
+//-------------------------------------------- Constructeurs - destructeur
+    Commande ( const Commande & unCommande );
+    // Mode d'emploi (constructeur de copie) : Le constructeur de copie
+    // est juste déclaré.
+    //
+    // Contrat :
+    //
+
+
+    Commande (int nbArg, char ** arg);
+    // Mode d'emploi : Ce constructeur construit un objet
+    // de la classe commande. Il initialise l'attribut nombreArg grâce
+    // au paramètre nbArg qui est un entier représentant le nombre de paramètre passé en
+    // ligne de commande. Il initialise aussi l'attribut option en réalisant une copie en surface
+    // du paramètre <arg> qui représente une tableau de pointeur de caractère comportant
+    // les valeurs des différents paramètres.
+    //
+    // Contrat :
+    //
+
+    virtual ~Commande ( );
+    // Mode d'emploi : Ce destructeur libére la totalité des ressources (mémoire)
+    // occupées par notre objet Commande.
+    //
+    // Contrat :
+    //
+
+//------------------------------------------------------------------ PRIVE
+
+protected:
+//----------------------------------------------------- Méthodes protégées
+
     bool OptExclure();
     // Mode d'emploi :
     // Cette méthode permet de déterminer si l'option '-e'
@@ -96,6 +140,7 @@ public:
     // Contrat :
     //
 
+
     int VerifierHeure(int horaire);
     // Mode d'emploi :
     // Cette méthode vérifie si l'heure passée en option
@@ -123,42 +168,17 @@ public:
     //
 
     bool VerifierExtensionLog(string nomFichierLog);
-
-
-//------------------------------------------------- Surcharge d'opérateurs
-    Commande & operator = ( const Commande & unCommande );
     // Mode d'emploi :
+    // Cette méthode vérifie si le fichier contenant les logs apache passé en dernier paramètre dans
+    // la ligne de commande est valide. Un fichier est valide si son extension
+    // est '.log'.
+    // Le paramètre <nomFichierLog> est une chaîne de caractère qui
+    // correspond au nom du fichier spécifié par l'utilisateur en
+    // ligne de commande.
+    // Retourne un booléen : true si le fichier est valide, false sinon.
     //
     // Contrat :
     //
-
-
-
-
-//-------------------------------------------- Constructeurs - destructeur
-    Commande ( const Commande & unCommande );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-
-    Commande (int nbArg, char ** arg);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    virtual ~Commande ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-//------------------------------------------------------------------ PRIVE
-
-protected:
-//----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
 	char** option;
