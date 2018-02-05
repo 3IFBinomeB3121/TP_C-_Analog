@@ -22,6 +22,23 @@ using namespace std;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Commande>
+// La classe <Commande> permet de récupérer le nombre d'options passées en ligne de commande
+// sur le shell par l'utilisateur et leur valeur. A partir de ces paramètres, elle les analyse
+// et construit une réponse en fonction de celles-ci.
+// Pour construire une réponse, les options passées en paramètre doivent être valides.
+// Les trois options facultatives possibles sont:
+// '-t heure', '-g nomfichier.dot' et '-e'. Celles-ci peuvent être combinées et
+// placées dans un ordre quelconque entre elles. En revanche, le seul paramètre obligatoire est
+// le nom du fichier dont on analyse les logs  et doit être d'extension .log, existait et être placé en dernier.
+// '-t heure' : Permet de ne prendre en compte que les hits qui sont dans le créneau horaire correspondant
+// à l'intervalle [heure, heure+1[
+// '-g nomfichier.dot' : Permet de produire un fichier au format GraphViz du graphe analysé.
+// '-e' : Permet d'exclure tous les documents qui ont une extension jpg, png, css ou js.
+// Quand il n'y a aucune option, seul un affichage du top 10 sans filtre des documents les plus consultés
+// est affiché.
+// Les différentes réponses possibles sont donc le remplissage d'un fichier .dot à partir du fichier de logs analysé,
+// l'affichage d'un top 10 des url des documents les plus consultés, le mélange des deux ou un message d'erreur.
+// Ces réponses, en fonction des options, sont renvoyées de manière filtrées ou non.
 //
 //
 //------------------------------------------------------------------------
@@ -38,11 +55,73 @@ public:
     // Contrat :
     //
     void Choisir();
+    // Mode d'emploi :
+    // La méthode Choisir permet de déterminer quelles
+    // options l'utilisateur a rentré et si elles sont valides, construit la
+    // réponse adéquate. Les différentes options à déterminées sont : '-e',
+    // '-g nomfichier.dot' et '-t heure'. L'ordre n'est pas pris en compte mais
+    // en cas d'options différentes ou de nombre trop élevè ou trop faible, un
+    // message d'erreur est retourné.
+    //
+    // Contrat :
+    //
+
     bool OptExclure();
+    // Mode d'emploi :
+    // Cette méthode permet de déterminer si l'option '-e'
+    // a été rentré en ligne de commande.
+    // Renvoie un booléen : true si l'option a été rentré, false sinon.
+    //
+    // Contrat :
+    //
+
     int OptTracerGraphe();
+    // Mode d'emploi :
+    // Cette méthode permet de déterminer si l'option '-g nomFichier.dot'
+    // a été rentré en ligne de commande.
+    // Renvoie un entier correspondant à l'indice dans le tableau d'options
+    // où l'élément '-g' a été détecté.
+    // S'il n'est pas détecté, renvoie 0.
+    //
+    // Contrat :
+    //
     int OptHeure();
+    // Mode d'emploi :
+    // Cette méthode permet de déterminer si l'option '-t heure'
+    // a été rentré en ligne de commande.
+    // Renvoie un entier correspondant à l'indice dans le tableau d'options
+    // où l'élément '-t' a été détecté.
+    // S'il n'est pas détecté, renvoie 0.
+    //
+    // Contrat :
+    //
+
     int VerifierHeure(int horaire);
+    // Mode d'emploi :
+    // Cette méthode vérifie si l'heure passée en option
+    // après '-t' est valide. Une heure valide est comprise
+    // entre 0 et 23.
+    // Le paramètre <horaire> est un entier qui correspond à l'heure spécifié par
+    // l'utilisateur en ligne de commande.
+    // Retourne un entier correspondant à l'heure si elle est valide,
+    // sinon retourne -1.
+    //
+    // Contrat :
+    //
+
     bool VerifierExtensionDot(string nomFichierDot);
+    // Mode d'emploi :
+    // Cette méthode vérifie si le fichier passé en option
+    // après '-g' est valide. Un fichier est valide si son extension
+    // est '.dot'.
+    // Le paramètre <nomFichierDot> est une chaîne de caractère qui
+    // correspond au nom du fichier spécifié par l'utilisateur en
+    // ligne de commande.
+    // Retourne un booléen : true si le fichier est valide, false sinon.
+    //
+    // Contrat :
+    //
+
     bool VerifierExtensionLog(string nomFichierLog);
 
 

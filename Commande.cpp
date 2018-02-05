@@ -55,7 +55,6 @@ void Commande::Choisir()
             {
                 cerr << "Trop d'options rentrées" << endl;
             }
-
         }
         else if (nombreArg == 2)
         {
@@ -88,7 +87,7 @@ void Commande::Choisir()
 				}
 				break;
             }
-            
+
 
             case 4:
             {
@@ -104,7 +103,6 @@ void Commande::Choisir()
                         S.RemplirMapSansCond(option[nombreArg-1]);
                         S.AfficherTop();
                         Graphe G;
-                        cout << "fichier " << nomFichierDot << " créé" << endl;
                         G.RemplirGrapheSansCond(option[nombreArg-1]);
                         G.CreerFichier(nomFichierDot);
                     }
@@ -152,7 +150,6 @@ void Commande::Choisir()
                             cout << "Affichage avec les fichiers '.css', '.jpg', '.png' et '.js' exclus" << endl;
                             S.AfficherTop();
                             Graphe G;
-                            cout << "fichier " << nomFichierDot << " créé" << endl;
                             G.RemplirGrapheExclus(option[nombreArg-1]);
                             G.CreerFichier(nomFichierDot);
                         }
@@ -198,7 +195,6 @@ void Commande::Choisir()
                     cout << "Affichage pour un intervalle compris entre " << valideH << "h00 et " << valideH << "h59" << endl;
                     S.AfficherTop();
                     Graphe G;
-                    cout << "fichier " << nomFichierDot << " créé" << endl;
                     G.RemplirGrapheExclusHeure(valideH, option[nombreArg-1]);
                     G.CreerFichier(nomFichierDot);
                 }
@@ -225,7 +221,6 @@ void Commande::Choisir()
                     cout << "Affichage avec les fichiers '.png', '.css', '.js' et '.jpg' exclus pour un horaire compris entre " << valideHeu << "h00 et " << valideHeu << "h59" << endl;
                     S.AfficherTop();
                     Graphe G;
-                    cout << "fichier " << nomFichierDot << " créé" << endl;
                     G.RemplirGrapheExclusHeure(valideHeu,option[nombreArg-1]);
                     G.CreerFichier(nomFichierDot);
                 }
@@ -336,7 +331,7 @@ int Commande::VerifierHeure(int horaire) // Retourne l'heure si elle est valide 
 	{
 		return -1;
 	}
-		
+
     if (0<= nombre && nombre<24)
     {
         return nombre;

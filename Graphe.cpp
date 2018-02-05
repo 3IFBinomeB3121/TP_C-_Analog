@@ -300,6 +300,14 @@ void Graphe::CreerFichier (string nomFichierDot)
 			cerr << "Problème dans l'ouverture du fichier" << endl;
 		}
 		fichier.close();
+		if (existe)
+        {
+            cout << "Les données du fichier " << nomFichierDot << " ont été écrasés." << endl;
+		}
+		else
+        {
+            cout << "fichier " << nomFichierDot << " créé" << endl;
+        }
 	}
 	else
 	{
