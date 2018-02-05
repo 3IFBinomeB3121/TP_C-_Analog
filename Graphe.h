@@ -2,9 +2,9 @@
                            Graphe  -  description
                              -------------------
     début                : 10/01/2018
-    copyright            : (C) 2018 par Christophe ETIENNE & William Occeli
+    copyright            : (C) 2018 par Christophe ETIENNE & William Occelli
     e-mail               : christophe.etienne@insa-lyon.fr
-                           william.occeli@insa-lyon.fr
+                           william.occelli@insa-lyon.fr
 *************************************************************************/
 
 //---------- Interface de la classe <Graphe> (fichier Graphe.h) ----------------
@@ -24,9 +24,9 @@
 //------------------------------------------------------------------------
 // Rôle de la classe <Graphe>
 // La classe Graphe permet de produire un fichier au format Graphviz du fichier
-// de lof Apache analysé. Chaque document apparait sous la forme d'un noeud
+// de log Apache analysé. Chaque document apparait sous la forme d'un noeud
 // et chaque arc du graphe indique le nombre de parcours associés.
-// Elle possède deux attributs qui s'appuie chacun sur la structure de
+// Elle possède deux attributs qui s'appuient chacun sur la structure de
 // données table de hachage.
 //
 //------------------------------------------------------------------------
@@ -58,7 +58,7 @@ public:
     // Mode d'emploi : Cette méthode permet de remplir les attributs
     // noeud et arc à partir d'un fichier de log Apache passé en paramètre.
     // Le remplissage des informations est filtré en fonction de l'heure
-    // où on a effectué la requête. Cette heure est spécifié par l'utilisateur
+    // où on a effectué la requête. Cette heure est spécifiée par l'utilisateur
     // en option dans la ligne de commande.
     // Les informations stockées sont:
     // - Pour noeud, l'url du document consulté comme clé associé avec un id unique en valeur.
@@ -96,7 +96,7 @@ public:
     // Le remplissage des informations est filtré en fonction de l'extension du document
     // consulté et de l'heure à laquelle la requête est effectuée.
     // Les informations ne sont pas retenues si l'extension est '.jpg', '.png',
-    // '.css' ou '.js' et si l'heure est différente de celle spécifié par l'utilisateur
+    // '.css' ou '.js' et si l'heure est différente de celle spécifiée par l'utilisateur
     // en option dans la ligne de commande.
     // Les informations stockées sont:
     // - Pour noeud, l'url du document consulté comme clé associé avec un id unique en valeur.

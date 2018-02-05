@@ -2,9 +2,9 @@
                            Log  -  description
                              -------------------
     début                : 10/01/2018
-    copyright            : (C) 2018 par Christophe ETIENNE & William Occeli
+    copyright            : (C) 2018 par Christophe ETIENNE & William Occelli
     e-mail               : christophe.etienne@insa-lyon.fr
-                           william.occeli@insa-lyon.fr
+                           william.occelli@insa-lyon.fr
 *************************************************************************/
 
 //---------- Interface de la classe <Log> (fichier Log.h) ----------------
@@ -29,8 +29,8 @@ using namespace std;
 // lue dans un fichier de log Apache. Les différentes informations stockées sont
 // le référent, l'adresse IP, le nom d'utilisateur du visiteur, son pseudo,
 // la date et l'heure (greenwich) de la requête, la méthode HTTP utilisée,
-// l'url du document recherchée, l'url du document consulté,
-// le protocole HTTP utilisée, le status code HTTP, la quantité de données
+// l'url du document recherché, l'url du document consulté,
+// le protocole HTTP utilisé, le status code HTTP, la quantité de données
 // transférées en octet et enfin l'identification du client navigateur.
 //
 //------------------------------------------------------------------------
@@ -54,21 +54,22 @@ public:
 
     string GetCible();
     // Mode d'emploi : Cette méthode permet de récupérer
+    // l'information concernant l'url du document consulté.
+    // Retourne un string contenant l'url du document consulté.
+    //
+    // Contrat :
+    //
+
+    string GetSource();
+	// Mode d'emploi : Cette méthode permet de récupérer
     // l'information concernant l'url du document à partir duquel on
     // effectue la requête.
     // Retourne un string contenant l'url du document à partir duquel
     // on effectue la requête.
     //
     // Contrat :
-    //
+    // 
 
-    string GetSource();
-    // Mode d'emploi : Cette méthode permet de récupérer
-    // l'information concernant l'url du document consultée.
-    // Retourne un string contenant l'url du document onsultée.
-    //
-    // Contrat :
-    //
 
     int GetHeure();
     // Mode d'emploi : Cette méthode permet de récupérer
@@ -82,7 +83,7 @@ public:
     // Mode d'emploi : Surcharge de la fonction non membre operator <<
     // déclarée amie de la classe Log.
     // L'affichage pour un objet de la classe Log est formaté de la manière suivante:
-    // Affichage de tous les attributs( les différentes inforamtions), un par ligne.
+    // Affichage de tous les attributs( les différentes informations), un par ligne.
     // Le premier paramètre est une référence sur un objet de type ostream.
     // Le second paramètre est une référence constante sur un objet de type Log qui est
     // l'objet dont on souhaite affiché les informations.

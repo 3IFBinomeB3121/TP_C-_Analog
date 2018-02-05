@@ -2,9 +2,9 @@
                            Commande  -  description
                              -------------------
     début                : 10/01/2018
-    copyright            : (C) 2018 par Christophe ETIENNE & William Occeli
+    copyright            : (C) 2018 par Christophe ETIENNE & William Occelli
     e-mail               : christophe.etienne@insa-lyon.fr
-                           william.occeli@insa-lyon.fr
+                           william.occelli@insa-lyon.fr
 *************************************************************************/
 
 //---------- Interface de la classe <Commande> (fichier Commande.h) ----------------
@@ -29,7 +29,7 @@ using namespace std;
 // Les trois options facultatives possibles sont:
 // '-t heure', '-g nomfichier.dot' et '-e'. Celles-ci peuvent être combinées et
 // placées dans un ordre quelconque entre elles. En revanche, le seul paramètre obligatoire est
-// le nom du fichier dont on analyse les logs  et doit être d'extension .log, existait et être placé en dernier.
+// le nom du fichier dont on analyse les logs  et doit être d'extension .log, exister et être placé en dernier.
 // '-t heure' : Permet de ne prendre en compte que les hits qui sont dans le créneau horaire correspondant
 // à l'intervalle [heure, heure+1[
 // '-g nomfichier.dot' : Permet de produire un fichier au format GraphViz du graphe analysé.
@@ -58,9 +58,9 @@ public:
     // Mode d'emploi :
     // La méthode Choisir permet de déterminer quelles
     // options l'utilisateur a rentré et si elles sont valides, construit la
-    // réponse adéquate. Les différentes options à déterminées sont : '-e',
+    // réponse adéquate. Les différentes options à déterminer sont : '-e',
     // '-g nomfichier.dot' et '-t heure'. L'ordre n'est pas pris en compte mais
-    // en cas d'options différentes ou de nombre trop élevè ou trop faible, un
+    // en cas d'options différentes ou de nombre trop élevé ou trop faible, un
     // message d'erreur est retourné.
     //
     // Contrat :
@@ -90,9 +90,9 @@ public:
     Commande (int nbArg, char ** arg);
     // Mode d'emploi : Ce constructeur construit un objet
     // de la classe commande. Il initialise l'attribut nombreArg grâce
-    // au paramètre nbArg qui est un entier représentant le nombre de paramètre passé en
+    // au paramètre nbArg qui est un entier représentant le nombre de paramètres passés en
     // ligne de commande. Il initialise aussi l'attribut option en réalisant une copie en surface
-    // du paramètre <arg> qui représente une tableau de pointeur de caractère comportant
+    // du paramètre <arg> qui représente un tableau de pointeurs de caractère comportant
     // les valeurs des différents paramètres.
     //
     // Contrat :
@@ -113,8 +113,8 @@ protected:
     bool OptExclure();
     // Mode d'emploi :
     // Cette méthode permet de déterminer si l'option '-e'
-    // a été rentré en ligne de commande.
-    // Renvoie un booléen : true si l'option a été rentré, false sinon.
+    // a été rentrée en ligne de commande.
+    // Renvoie un booléen : true si l'option a été rentrée, false sinon.
     //
     // Contrat :
     //
@@ -122,7 +122,7 @@ protected:
     int OptTracerGraphe();
     // Mode d'emploi :
     // Cette méthode permet de déterminer si l'option '-g nomFichier.dot'
-    // a été rentré en ligne de commande.
+    // a été rentrée en ligne de commande.
     // Renvoie un entier correspondant à l'indice dans le tableau d'options
     // où l'élément '-g' a été détecté.
     // S'il n'est pas détecté, renvoie 0.
@@ -132,7 +132,7 @@ protected:
     int OptHeure();
     // Mode d'emploi :
     // Cette méthode permet de déterminer si l'option '-t heure'
-    // a été rentré en ligne de commande.
+    // a été rentrée en ligne de commande.
     // Renvoie un entier correspondant à l'indice dans le tableau d'options
     // où l'élément '-t' a été détecté.
     // S'il n'est pas détecté, renvoie 0.
@@ -146,7 +146,7 @@ protected:
     // Cette méthode vérifie si l'heure passée en option
     // après '-t' est valide. Une heure valide est comprise
     // entre 0 et 23.
-    // Le paramètre <horaire> est un entier qui correspond à l'heure spécifié par
+    // Le paramètre <horaire> est un entier qui correspond à l'heure spécifiée par
     // l'utilisateur en ligne de commande.
     // Retourne un entier correspondant à l'heure si elle est valide,
     // sinon retourne -1.
