@@ -1,0 +1,43 @@
+analog(1)		Manuel d'utilisation de analog		     analog(1)
+
+
+
+NOM
+       analog - Analyse un fichier de log Apache
+
+
+SYNOPSIS
+       ./analog [-g nomfichier.dot] [-e] [-t heure] nomFichier.log
+
+
+DESCRIPTION
+       analog  traite un fichier de log Apache (nomFichier.log), affiche les
+       statistiques des opérations effectuées sur un serveur (nombre de consultations
+       par url). Selon les options, il est possible de filtrer les données 
+       ou/et de créer un fichier .dot qui sert de support à l'outil GraphViz.
+
+       Par défaut (sans option) : affiche sur la console la liste des 10 urls de doc‐
+       uments les plus consult�es par ordre décroissant
+
+
+   OPTIONS
+       -g nomfichier.dot
+	      génère un fichier au format  GraphViz (.dot) des données obtenues
+	      Chaque cible apparaîtra sous la forme d'un noeud et chaque arc 
+	      indiquera le nombre de hits associés
+
+
+       -e     
+	      exclut tous les documents qui ont une extension de  type	image (.png et .jpg),
+	      css (.css) ou javascript (.js)
+
+
+       -t heure
+	      exclut  les hits qui ne sont pas dans le créneau horaire (heure de 
+	      Greenwich) correspondant à l'intervalle [heure, heure+1[ 
+
+
+AUTHOR
+       Binôme B3121:
+       Etienne Christophe
+       Occelli William
