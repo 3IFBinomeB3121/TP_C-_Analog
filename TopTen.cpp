@@ -40,7 +40,7 @@ ostream & operator << (ostream & flux, const TopTen & unTopTen)
             compteur++;
         }
     }
-    else if (nbLog == 0)
+    else if (nbLog == 1)
     {
 		flux << "Le fichier ne contient aucun log" << endl;
 	}
