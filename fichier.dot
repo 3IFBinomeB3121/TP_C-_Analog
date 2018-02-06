@@ -1,5 +1,0 @@
-digraph {
-	node1[label=""];
-	node0[label="/"];
-	node0 -> node1 [label="1"];
-}
